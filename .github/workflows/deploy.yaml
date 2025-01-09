@@ -3,7 +3,7 @@ name: CI
 
 env:
     IMAGE_NAME: trialstracker
-    PUBLIC_IMAGE_NAME: ghcr.io/ebmdatalab/trialstracker
+    PUBLIC_IMAGE_NAME: ghcr.io/bennettoxford/trialstracker
     REGISTRY: ghcr.io
     SSH_AUTH_SOCK: /tmp/agent.sock
 
