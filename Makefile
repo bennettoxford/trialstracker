@@ -6,7 +6,7 @@ build:
 .PHONY: dist
 static-site:
 	# Install npm dependencies and build the main.js file
-	cd app/js && npm ci && npm run build
+	cd app/js && npm ci && npm run test && npm run build
 
 	# Copy app contents into dist, preserving file attributes and keeping only
 	# main.js in js; remove stale and excluded files.
