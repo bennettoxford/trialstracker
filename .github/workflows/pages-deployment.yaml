@@ -1,0 +1,37 @@
+name: "Build & deploy to Cloudflare Pages"
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: "read"
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: "Build site and deploy to Cloudflare Pages"
+    runs-on: "ubuntu-26.04"
+    steps:
+      - name: "Checkout repo"
+        uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: "Build site"
+        uses: "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1"
+        with:
+          node-version: "20"
+          package-manager-cache: false
+      - run: "make static-site"
+
+      - name: "Deploy to Cloudflare Pages"
+        uses: "cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0" # v4.1.3
+        with:
+          accountId: "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}"
+          apiToken: "${{ secrets.CLOUDFLARE_DIRECT_UPLOAD_API_TOKEN }}"
+          command: "pages deploy dist --project-name=trialstracker-ebmdatalab"
