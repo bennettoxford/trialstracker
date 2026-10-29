@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "watch": "watchify index.js -o main.js --debug --verbose",
-    "build": "node esbuild.config.mjs"
+    "watch": "npm run build -- --watch --sourcemap",
+    "build": "esbuild index.js --bundle --outfile=main.js --target=chrome150,edge151,firefox156,ios18.5,safari26.6 --minify"
   },
   "author": "Anna Powell-Smith",
   "repository": {
@@ -17,17 +17,13 @@
   "dependencies": {
     "d3": "^3.5.17",
     "d3-tip": "^0.6.7",
-    "datatables.net": "^1.10.12",
-    "datatables.net-bs": "^1.10.12",
-    "react": "^15.3.2"
+    "datatables.net": "^1.13.11",
+    "datatables.net-bs": "^1.13.11",
+    "jquery": "^3.7.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.18.2",
-    "browserslist": "^4.20.3",
-    "chai": "^3.5.0",
-    "esbuild": "^0.14.42",
-    "esbuild-plugin-babel": "^0.2.3",
-    "mocha": "^2.5.3",
-    "watchify": "^3.2.1"
+    "chai": "^6.3.0",
+    "esbuild": "^0.28.2",
+    "mocha": "^12.0.3"
   }
 }

@@ -1,7 +1,7 @@
 var d3 = require('d3');
 var d3tip = require('d3-tip')(d3);
 var $ = require('jquery');
-var dt = require('datatables.net')();
+require('datatables.net');
 var utils = require('./utils');
 
 $('.jscontent').show();
